@@ -14,11 +14,11 @@ class Street implements ValueObjectInterface
     /** @var StringLiteral */
     protected $number;
 
-    /** @var String Building, floor and unit */
+    /** @var StringLiteral Building, floor and unit */
     protected $elements;
 
     /**
-     * @var String __toString() format
+     * @var StringLiteral __toString() format
      * Use properties corresponding placeholders: %name%, %number%, %elements%
      */
     protected $format;
@@ -50,14 +50,14 @@ class Street implements ValueObjectInterface
         $elements = $elementsString ? new StringLiteral($elementsString) : null;
         $format   = $formatString ? new StringLiteral($formatString) : null;
 
-        return new self($name, $number, $elements, $format);
+        return new static($name, $number, $elements, $format);
     }
 
     /**
      * Returns a new Street object
      *
-     * @param String $name
-     * @param String $number
+     * @param StringLiteral $name
+     * @param StringLiteral $number
      */
     public function __construct(StringLiteral $name, StringLiteral $number, StringLiteral $elements = null, StringLiteral $format = null)
     {
@@ -88,14 +88,14 @@ class Street implements ValueObjectInterface
 
         return $this->getName()->sameValueAs($street->getName()) &&
                $this->getNumber()->sameValueAs($street->getNumber()) &&
-               $this->getElements()->sameValueAs($street->getElements());
+               $this->getElements()->sameValueAs($street->getElements())
         ;
     }
 
     /**
      * Returns street name
      *
-     * @return String
+     * @return StringLiteral
      */
     public function getName()
     {
@@ -105,7 +105,7 @@ class Street implements ValueObjectInterface
     /**
      * Returns street number
      *
-     * @return String
+     * @return StringLiteral
      */
     public function getNumber()
     {
@@ -114,7 +114,7 @@ class Street implements ValueObjectInterface
 
     /**
      * Returns street elements
-     * @return String
+     * @return StringLiteral
      */
     public function getElements()
     {
